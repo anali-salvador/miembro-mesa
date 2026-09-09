@@ -1,0 +1,29 @@
+# Dockerfile optimizado con Alpine
+FROM python:3.12-alpine
+
+WORKDIR /app
+
+# Dependencias de compilación necesarias para paquetes con extensiones nativas.
+# Se instalan y se eliminan en la misma capa para mantener la imagen pequeña.
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev libffi-dev \
+    && python -m pip install --no-cache-dir --upgrade pip
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    && apk del .build-deps
+
+COPY . .
+
+RUN addgroup -S app && adduser -S app -G app \
+    && mkdir -p /app/data \
+    && chown -R app:app /app
+
+USER app
+
+ENV DATA_DIR=/app/data \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "app:app"]

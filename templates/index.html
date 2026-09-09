@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Registrar Miembro de Mesa{% endblock %}
+{% block content %}
+  <h2>Nuevo miembro de mesa</h2>
+  <form method="post" action="{{ url_for('registrar') }}" class="form">
+    <label for="dni">DNI</label>
+    <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{8}" placeholder="Ej: 12345678" required>
+
+    <label for="region">Región</label>
+    <select id="region" name="region" required>
+      <option value="" disabled selected>Seleccione una región</option>
+      {% for r in regiones %}
+        <option value="{{ r }}">{{ r }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="provincia">Provincia</label>
+    <input type="text" id="provincia" name="provincia" placeholder="Ej: Lima" required>
+
+    <label for="distrito">Distrito</label>
+    <input type="text" id="distrito" name="distrito" placeholder="Ej: Miraflores" required>
+
+    <label for="direccion">Dirección del local de votación</label>
+    <textarea id="direccion" name="direccion" rows="3" placeholder="Ej: Av. Larco 123" required></textarea>
+
+    <button type="submit">Registrar</button>
+  </form>
+{% endblock %}

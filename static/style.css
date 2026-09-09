@@ -1,0 +1,123 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --text: #1c1e21;
+  --muted: #6b7280;
+  --accent: #b91c1c;
+  --border: #d1d5db;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  background: var(--accent);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.topbar h1 { margin: 0; font-size: 1.25rem; }
+
+.topbar nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.topbar nav a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.form label { font-weight: 600; margin-top: 0.5rem; }
+
+.form input,
+.form select,
+.form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form button {
+  margin-top: 1rem;
+  padding: 0.65rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form button:hover { opacity: 0.9; }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+th { background: #f0f0f0; }
+
+.flashes { list-style: none; padding: 0; }
+
+.flash {
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.flash.success { background: #dcfce7; color: #166534; }
+.flash.error { background: #fee2e2; color: #991b1b; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181c;
+    --card: #212327;
+    --text: #f2f2f2;
+    --muted: #9ca3af;
+    --border: #3a3d42;
+  }
+  th { background: #2a2d33; }
+  .flash.success { background: #14532d; color: #dcfce7; }
+  .flash.error { background: #7f1d1d; color: #fee2e2; }
+}
