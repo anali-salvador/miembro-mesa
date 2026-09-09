@@ -1,28 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Registrar Miembro de Mesa{% endblock %}
 {% block content %}
-  <h2>Nuevo miembro de mesa</h2>
-  <form method="post" action="{{ url_for('registrar') }}" class="form">
-    <label for="dni">DNI</label>
-    <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{8}" placeholder="Ej: 12345678" required>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h2 class="card-title mb-4 display-title">Nuevo miembro de mesa</h2>
 
-    <label for="region">Región</label>
-    <select id="region" name="region" required>
-      <option value="" disabled selected>Seleccione una región</option>
-      {% for r in regiones %}
-        <option value="{{ r }}">{{ r }}</option>
-      {% endfor %}
-    </select>
+          <form method="post" action="{{ url_for('registrar') }}">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="dni" name="dni" maxlength="8" pattern="\d{8}" placeholder="DNI" required>
+              <label for="dni">DNI</label>
+            </div>
 
-    <label for="provincia">Provincia</label>
-    <input type="text" id="provincia" name="provincia" placeholder="Ej: Lima" required>
+            <div class="form-floating mb-3">
+              <select class="form-select" id="region" name="region" required>
+                <option value="" disabled selected>Seleccione una región</option>
+                {% for r in regiones %}
+                  <option value="{{ r }}">{{ r }}</option>
+                {% endfor %}
+              </select>
+              <label for="region">Región</label>
+            </div>
 
-    <label for="distrito">Distrito</label>
-    <input type="text" id="distrito" name="distrito" placeholder="Ej: Miraflores" required>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Provincia" required>
+              <label for="provincia">Provincia</label>
+            </div>
 
-    <label for="direccion">Dirección del local de votación</label>
-    <textarea id="direccion" name="direccion" rows="3" placeholder="Ej: Av. Larco 123" required></textarea>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Distrito" required>
+              <label for="distrito">Distrito</label>
+            </div>
 
-    <button type="submit">Registrar</button>
-  </form>
+            <div class="form-floating mb-4">
+              <textarea class="form-control" id="direccion" name="direccion" placeholder="Dirección del local de votación" style="height: 100px" required></textarea>
+              <label for="direccion">Dirección del local de votación</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

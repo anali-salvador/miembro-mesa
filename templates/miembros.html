@@ -1,32 +1,40 @@
 {% extends "base.html" %}
 {% block title %}Miembros Registrados{% endblock %}
 {% block content %}
-  <h2>Miembros de mesa registrados</h2>
-  {% if miembros %}
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>DNI</th>
-            <th>Región</th>
-            <th>Provincia</th>
-            <th>Distrito</th>
-            <th>Dirección del local de votación</th>
-            <th>Fecha de registro</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for m in miembros %}
-            <tr>
-              {% for valor in m %}
-                <td>{{ valor }}</td>
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-3 gap-2">
+        <h2 class="mb-0 display-title">Miembros de mesa registrados</h2>
+        <a href="{{ url_for('descargar') }}" class="btn btn-outline-primary">⬇️ Descargar Excel</a>
+      </div>
+
+      {% if miembros %}
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>DNI</th>
+                <th>Región</th>
+                <th>Provincia</th>
+                <th>Distrito</th>
+                <th>Dirección del local de votación</th>
+                <th>Fecha de registro</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in miembros %}
+                <tr>
+                  {% for valor in m %}
+                    <td>{{ valor }}</td>
+                  {% endfor %}
+                </tr>
               {% endfor %}
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-muted mb-0">Aún no hay miembros registrados.</p>
+      {% endif %}
     </div>
-  {% else %}
-    <p>Aún no hay miembros registrados.</p>
-  {% endif %}
+  </div>
 {% endblock %}
